@@ -1,54 +1,32 @@
-import DeployButton from "../components/DeployButton";
-import AuthButton from "../components/AuthButton";
-import { createClient } from "@/utils/supabase/server";
-import ConnectSupabaseSteps from "@/components/tutorial/ConnectSupabaseSteps";
-import SignUpUserSteps from "@/components/tutorial/SignUpUserSteps";
-import Header from "@/components/Header";
+import VideoSplash from "@/components/VideoSplash";
+import React from "react";
+import Image from "next/image";
+const videosrc =
+  "https://ygrygectjhacikpwtrna.supabase.co/storage/v1/object/public/Pictures/Lib/website-reel.mp4?t=2024-02-20T17%3A13%3A26.196Z";
+const logosrc =
+  "https://ygrygectjhacikpwtrna.supabase.co/storage/v1/object/public/Pictures/Lib/HeaderLogo.png?t=2024-02-20T16%3A15%3A12.685Z";
 
-export default async function Index() {
-  const canInitSupabaseClient = () => {
-    // This function is just for the interactive tutorial.
-    // Feel free to remove it once you have Supabase connected.
-    try {
-      createClient();
-      return true;
-    } catch (e) {
-      return false;
-    }
-  };
+interface HomePageProps {}
 
-  const isSupabaseConnected = canInitSupabaseClient();
-
+const HomePage: React.FC<HomePageProps> = () => {
   return (
-    <div className="flex-1 w-full flex flex-col gap-20 items-center">
-      <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-        <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
-          <DeployButton />
-          {isSupabaseConnected && <AuthButton />}
+    <div className="flex min-h-screen flex-col">
+      <section className="max-w-screen-2xl">
+        <VideoSplash videoSrc={videosrc} />
+      </section>
+      <section className="flex max-w-full justify-center py-12">
+        <div className="flex-row">
+          <Image src={logosrc} alt="logo" width={600} height={400} />
+          <p className="absolute left-1/2 mt-auto text-sm font-thin italic text-yellow-200">
+            WE ENVISION, CREATE, AND EXECUTE
+          </p>
         </div>
-      </nav>
-
-      <div className="animate-in flex-1 flex flex-col gap-20 opacity-0 max-w-4xl px-3">
-        <Header />
-        <main className="flex-1 flex flex-col gap-6">
-          <h2 className="font-bold text-4xl mb-4">Next steps</h2>
-          {isSupabaseConnected ? <SignUpUserSteps /> : <ConnectSupabaseSteps />}
-        </main>
-      </div>
-
-      <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">
-        <p>
-          Powered by{" "}
-          <a
-            href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-            target="_blank"
-            className="font-bold hover:underline"
-            rel="noreferrer"
-          >
-            Supabase
-          </a>
-        </p>
-      </footer>
+      </section>
+      <section>
+        <div className="text-center font-mono text-7xl ">Concepts</div>
+      </section>
     </div>
   );
-}
+};
+
+export default HomePage;

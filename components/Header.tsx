@@ -1,44 +1,30 @@
-import NextLogo from "./NextLogo";
-import SupabaseLogo from "./SupabaseLogo";
+import Image from "next/image";
 
-export default function Header() {
+type HeaderProps = {
+  logoSrc: string; // Path to the logo image
+  logoAlt: string; // Alt text for the logo image
+  options: string[]; // Array of text options for the menu
+};
+
+const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt, options }) => {
   return (
-    <div className="flex flex-col gap-16 items-center">
-      <div className="flex gap-8 justify-center items-center">
-        <a
-          href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <SupabaseLogo />
-        </a>
-        <span className="border-l rotate-45 h-6" />
-        <a href="https://nextjs.org/" target="_blank" rel="noreferrer">
-          <NextLogo />
-        </a>
+    <header className="flex items-center justify-between px-4 py-2 font-serif text-xl text-yellow-200">
+      <div className="">
+        <Image src={logoSrc} alt={logoAlt} width={250} height={100} />
       </div>
-      <h1 className="sr-only">Supabase and Next.js Starter Template</h1>
-      <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center">
-        The fastest way to build apps with{" "}
-        <a
-          href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-          target="_blank"
-          className="font-bold hover:underline"
-          rel="noreferrer"
-        >
-          Supabase
-        </a>{" "}
-        and{" "}
-        <a
-          href="https://nextjs.org/"
-          target="_blank"
-          className="font-bold hover:underline"
-          rel="noreferrer"
-        >
-          Next.js
-        </a>
-      </p>
-      <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent my-8" />
-    </div>
+      <nav className="navigation ">
+        <ul className="flex space-x-4">
+          {options.map((option) => (
+            <li key={option}>
+              <a href="#" className="hover:text-yellow-100 hover:underline">
+                {option}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </header>
   );
-}
+};
+
+export default Header;
